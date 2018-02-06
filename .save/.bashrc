@@ -121,3 +121,6 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# Override Buildroot folder for download
+BR2_DL_DIR=/home/nxf07296/workspace/Builds/buildroot_dl/

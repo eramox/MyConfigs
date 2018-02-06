@@ -130,3 +130,5 @@ alias gti='git'
 #disable auto open
 # gsettings set org.gnome.desktop.media-handling automount-open false
 
+# Modif of PATH for coverity tool
+export PATH=$PATH:/home/nxf07296/cov-analysis-linux64-8.5.0.5/bin

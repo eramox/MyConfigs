@@ -13,6 +13,7 @@ dump() {
   byobu list-windows -a -F "#S${d}#W${d}#{pane_current_path}"
 }
 
+# Save the configuration
 save() {
   dump > "$SAVE_FILE"
   echo "Session saved in $SAVE_FILE"
@@ -26,15 +27,22 @@ session_exists() {
   byobu has-session -t "$1" 2>/dev/null
 }
 
+# $1 Name of the session to which add a window
+# $2 Name of the window
+# $3 Location to set
 add_window() {
   byobu new-window -d -t "$1:" -n "$2" -c "$3"
 }
 
+# $1 Name of the session to create
+# $2 Name of the window
+# $3 Location to set
 new_session() {
   cd "$3" &&
   byobu new-session -d -s "$1" -n "$2" $4
 }
 
+# Restore a configuration from a file
 restore() {
   byobu start-server
   local count=0
@@ -46,7 +54,7 @@ restore() {
         add_window "$session_name" "$window_name" "$dir"
       else
         new_session "$session_name" "$window_name" "$dir" "$dimensions"
-        count=$(( count + 1 ))
+        count=$((count + 1))
       fi
     fi
   done < "$SAVE_FILE"
